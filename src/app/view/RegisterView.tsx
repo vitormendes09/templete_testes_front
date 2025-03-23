@@ -1,12 +1,11 @@
+"use client";
 import React from 'react';
 import RegisterForm  from '../components/RegisterForm';
-import { useRegisterController } from '../controllers/RegisterController';
+import { RegisterController } from '../controllers/RegisterController';
 
 
 const RegisterView: React.FC = () => {
-    const { user, handleChange, handleSubmit } = useRegisterController();
-  
-    return <RegisterForm user={user} onChange={handleChange} onSubmit={handleSubmit} />;
+    return <RegisterForm onSubmit={RegisterController.handleSubmit} />;
   };
   
   export default RegisterView;

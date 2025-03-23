@@ -7,3 +7,4 @@ export interface IUser {
     birthMonth: string;
     birthYear: string;
   }
+  

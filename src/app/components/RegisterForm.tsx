@@ -1,33 +1,66 @@
+"use client";
 import React from "react";
-import { TextField, Button, Grid, Typography } from "@mui/material";
+import { TextField, Button, Grid, Typography, Box} from "@mui/material";
 import { IRegisterFormProps } from "../contracts/IRegisterFormProps";
 
-const RegisterForm: React.FC<IRegisterFormProps> = ({ user, onChange, onSubmit }) => {
+
+const RegisterForm: React.FC<IRegisterFormProps> = ({ onSubmit }) => {
+  const [user, setUser] = React.useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    birthDay: "",
+    birthMonth: "",
+    birthYear: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
-    <Grid container spacing={2} direction="column">
-      <Typography variant="h4" align="center">Registro de Usuário</Typography>
+    <>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',  backgroundColor: "#f0f2f5",}}>
 
-      <TextField label="Nome" name="firstName" placeholder="Nome" value={user.firstName} onChange={onChange} />
-      <TextField label="Sobrenome" name="lastName" placeholder="Sobrenome" value={user.lastName} onChange={onChange} />
-      <TextField label="E-mail" name="email" placeholder="E-mail" type="email" value={user.email} onChange={onChange} />
-      <TextField label="Senha" name="password" placeholder="Senha" type="password" value={user.password} onChange={onChange} />
+      <Grid 
+      container spacing={2} 
+      direction="column" 
+      sx={{ width: "400px", 
+            padding: "20px", 
+            borderRadius: "12px", 
+            border: "1px solid #ccc", 
+            boxShadow: "4px 4px 15px rgba(0, 0, 0, 0.2)", 
+            backgroundColor: "#fff",
+            textAlign: "center", }} 
+            >
+        <Typography variant="h4" align="center">Registro de Usuário</Typography>
 
-      <Grid container spacing={1}>
-        <Grid item xs={4}>
-          <TextField label="Dia" name="birthDay" placeholder="Dia" value={user.birthDay} onChange={onChange} />
+        <TextField label="Nome" name="firstName" placeholder="Nome" onChange={handleChange} />
+        <TextField label="Sobrenome" name="lastName" placeholder="Sobrenome" onChange={handleChange} />
+        <TextField label="E-mail" name="email" placeholder="E-mail" type="email" onChange={handleChange} />
+        <TextField label="Senha" name="password" placeholder="Senha" type="password" onChange={handleChange} />
+
+        <Grid container spacing={1}>
+          <Grid item xs={4}>
+            <TextField label="Dia" name="birthDay" placeholder="Dia" onChange={handleChange} />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField label="Mês" name="birthMonth" placeholder="Mês" onChange={handleChange} />
+          </Grid>
+          <Grid item xs={4}>
+          <TextField label="Ano" name="birthYear" placeholder="Ano" onChange={handleChange} />
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <TextField label="Mês" name="birthMonth" placeholder="Mês" value={user.birthMonth} onChange={onChange} />
-        </Grid>
-        <Grid item xs={4}>
-          <TextField label="Ano" name="birthYear" placeholder="Ano" value={user.birthYear} onChange={onChange} />
-        </Grid>
+
+        <Button variant="contained" color="primary" onClick={() => onSubmit(user)}>
+          Registrar
+        </Button>
       </Grid>
-
-      <Button variant="contained" color="primary" onClick={onSubmit}>
-        Registrar
-      </Button>
-    </Grid>
+    </Box>
+    
+    </>
+    
   );
 };
 
