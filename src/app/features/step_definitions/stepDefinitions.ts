@@ -6,7 +6,7 @@ let browser: import('playwright').Browser, page: import('playwright').Page;
 Given("que o usuário preencheu todos os campos obrigatórios corretamente", async function () {
   browser = await chromium.launch({ headless: false });
   page = await browser.newPage();
-  await page.goto("http://localhost:3000/register");
+  await page.goto("http://localhost:3001");
 
   await page.fill('input[placeholder="Nome"]', "João");
   await page.fill('input[placeholder="Sobrenome"]', "Silva");
