@@ -1,4 +1,6 @@
 import { IUser } from './IUser';
 export interface IRegisterController {
-    handleSubmit: (user: IUser) => void;
+    user: IUser;
+    handleSubmit: () => void;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
